@@ -27,9 +27,11 @@ https://www.kaggle.com/datasets/laithjj/diabetic-foot-ulcer-dfu
 ```
 .
 ├── data/
-│   └── raw/              # dataset mentah (terisi otomatis via download_data.py)
+│   ├── raw/              # dataset mentah (terisi otomatis via download_data.py)
+│   └── processed/        # subset, hasil preprocessing, manifest.csv (di-generate)
 ├── notebook/             # notebook utama (.ipynb)
-├── src/                  # fungsi pendukung (ekstraksi fitur, clustering, dll)
+├── src/
+│   └── data_prep/        # subsetting, EDA, preprocessing, split train/test
 ├── outputs/              # hasil eksperimen: fitur (.npy), grafik, visualisasi cluster
 ├── download_data.py      # script untuk mengunduh dataset ke data/raw/
 ├── requirements.txt
