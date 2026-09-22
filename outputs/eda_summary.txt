@@ -1,0 +1,15 @@
+=== EDA Summary — Subset DFU ===
+
+Jumlah gambar per kategori:
+  Abnormal: 250
+  Normal: 250
+  Total: 500
+
+Statistik ukuran gambar:
+  Width  : min=220, max=330
+  Height : min=220, max=330
+  Ukuran unik: [(220, 220), (224, 224), (224, 244), (227, 227), (283, 280), (304, 294), (310, 316), (330, 330)]
+
+Sampel visual disimpan di: outputs/eda_sample_grid.png
+Sumber dataset: Kaggle Diabetic Foot Ulcer (DFU) Dataset (Laith Jj)
+https://www.kaggle.com/datasets/laithjj/diabetic-foot-ulcer-dfu
