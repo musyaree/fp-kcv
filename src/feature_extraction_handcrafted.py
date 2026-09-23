@@ -13,6 +13,7 @@ Output:
 from pathlib import Path
 import csv
 import numpy as np
+from scipy.stats import skew
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SUBSET_DIR = REPO_ROOT / "data" / "processed" / "subset"
@@ -38,8 +39,9 @@ def hitung_color_moments(row):
         channel = arr[:, :, c]
         fitur.append(channel.mean())
         fitur.append(channel.std())
+        fitur.append(skew(channel.flatten()))
 
-    return fitur  # [mean_H, std_H, mean_S, std_S, mean_V, std_V]
+    return fitur  # [mean_H, std_H, skew_H, mean_S, std_S, skew_S, mean_V, std_V, skew_V]
 
 def extract_features(rows):
     fitur = []
