@@ -1,7 +1,5 @@
 """
 Ekstraksi fitur CNN dari gambar yang sudah dipreproses (cnn_normalized).
-CNN pretrained dipakai cuma buat ekstraksi fitur, tidak dilatih ulang.
-Prediksi akhir tetap pakai K-Means, bukan CNN.
 
 Cara pakai:
     python src/feature_extraction.py
