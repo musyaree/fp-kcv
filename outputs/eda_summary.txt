@@ -10,6 +10,6 @@ Statistik ukuran gambar:
   Height : min=220, max=316
   Ukuran unik: [(220, 220), (224, 224), (224, 244), (227, 227), (243, 246), (283, 280), (304, 294), (310, 316), (320, 291)]
 
-Sampel visual disimpan di: outputs/eda_sample_grid.png
+Sampel visual disimpan di: outputs\eda_sample_grid.png
 Sumber dataset: Kaggle Diabetic Foot Ulcer (DFU) Dataset (Laith Jj)
 https://www.kaggle.com/datasets/laithjj/diabetic-foot-ulcer-dfu

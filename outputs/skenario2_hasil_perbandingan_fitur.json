@@ -1,0 +1,18 @@
+{
+  "k_digunakan": 2,
+  "perbandingan_fitur": [
+    {
+      "jenis_fitur": "CNN Embedding",
+      "n_fitur": 2048,
+      "silhouette_train": 0.17205606400966644,
+      "silhouette_test": 0.1963462084531784
+    },
+    {
+      "jenis_fitur": "Handcrafted (Warna)",
+      "n_fitur": 9,
+      "silhouette_train": 0.4479462596655234,
+      "silhouette_test": 0.4177886575228327
+    }
+  ],
+  "catatan": "Fitur dengan Silhouette Score lebih tinggi pada data uji dianggap lebih representatif untuk clustering. Lihat juga crosstab isi cluster vs label asli untuk menilai keterpisahan Abnormal/Normal secara kualitatif."
+}

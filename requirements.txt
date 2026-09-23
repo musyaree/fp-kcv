@@ -8,3 +8,4 @@ nbconvert==7.17.1
 ipykernel==7.3.0
 torch==2.9.0
 torchvision==0.24.0
+scikit-learn==1.7.2
