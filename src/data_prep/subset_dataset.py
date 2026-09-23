@@ -1,10 +1,10 @@
 """
-Mengambil subset seimbang dari Patches/Abnormal(Ulcer) dan Patches/Normal(Healthy skin)
+Menghilangkan gambar yang duplikat dan mengambil subset seimbang dari Patches/Abnormal(Ulcer) dan Patches/Normal(Healthy skin)
 di dalam dataset DFU mentah, lalu menyalinnya ke data/processed/subset/.
 
 Cara pakai:
-    python src/subset_dataset.py
-    python src/subset_dataset.py --per-class 150
+    python src/data_prep/subset_dataset.py
+    python src/data_prep/subset_dataset.py --per-class 150
 
 Output:
     data/processed/subset/Abnormal/*.jpg
@@ -14,6 +14,7 @@ Output:
 
 import argparse
 import csv
+import hashlib
 import random
 import shutil
 from pathlib import Path
@@ -28,7 +29,7 @@ CLASS_FOLDERS = {
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--per-class", type=int, default=250,
+        "--per-class", type=int, default=240,
         help="Jumlah gambar yang diambil per kelas",
     )
     parser.add_argument(
@@ -37,6 +38,16 @@ def parse_args(argv=None):
     )
     parser.add_argument("--seed", type=int, default=42, help="Random seed agar hasil reproducible.")
     return parser.parse_args(argv)
+
+def remove_duplicates(files):
+    seen = set()
+    unique = []
+    for path in files:
+        digest = hashlib.md5(path.read_bytes()).hexdigest()
+        if digest not in seen:
+            seen.add(digest)
+            unique.append(path)
+    return unique
 
 def main(argv=None):
     args = parse_args(argv)
@@ -53,17 +64,22 @@ def main(argv=None):
 
     for label, folder_name in CLASS_FOLDERS.items():
         source_dir = PATCHES_DIR / folder_name
-        files = sorted(p for p in source_dir.iterdir() if p.is_file())
+        all_files = sorted(p for p in source_dir.iterdir() if p.is_file())
+        files = remove_duplicates(all_files)
+        print(f"{label}: {len(all_files)} file, {len(files)} unik "
+              f"({len(all_files) - len(files)} duplikat dibuang)")
 
         if len(files) < args.per_class:
             raise ValueError(
-                f"Hanya ada {len(files)} gambar di '{folder_name}', "
+                f"Hanya ada {len(files)} gambar unik di '{folder_name}', "
                 f"tidak cukup untuk --per-class {args.per_class}."
             )
 
         selected = random.sample(files, args.per_class)
 
         dest_dir = args.output / label
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
         dest_dir.mkdir(parents=True, exist_ok=True)
 
         for src_path in selected:
